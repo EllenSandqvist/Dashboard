@@ -64,11 +64,12 @@ section{
     gap: 0.5em;
 }
 
-#notes {
+#note-board {
     background-color: rgba(255, 255, 255, 0.5);
     border-radius: 10px;
     border: none;
     width: 100%;
+    font-size: 1.1rem;
 }
 
 .bg-button {
