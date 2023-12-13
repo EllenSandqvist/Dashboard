@@ -17,22 +17,18 @@ body {
     align-items: center;
 }  
 
-.date {
-    background-color: rgba(255, 255, 255, 0.6);
-    padding: 0.3em 3.8em;
-    border-radius: 20px;
+h1, h2, h3, p {
+    font-family: 'Work Sans', sans-serif;
 }
 
 h1 {
     font-size: 4rem;
     color: #d7dcd6;
-    font-family: 'Work Sans', sans-serif;
     font-weight: 800;
 }
 
 h2 {
     font-size: 1.8rem;
-    font-family: 'Work Sans', sans-serif;
     font-weight: 300;
 }
 
@@ -64,6 +60,14 @@ section{
     gap: 0.5em;
 }
 
+/* --- Render Back ground button --- */
+.bg-button {
+    background-color: rgba(255, 255, 255, 0.6);
+    padding: 0.4em;
+    border-radius: 10px;
+}
+
+/* --- Note Board section --- */
 #note-board {
     background-color: rgba(255, 255, 255, 0.5);
     border-radius: 10px;
@@ -72,9 +76,13 @@ section{
     font-size: 1.1rem;
 }
 
-.bg-button {
+/* --- Date/Time section --- */
+.date {
     background-color: rgba(255, 255, 255, 0.6);
-    padding: 0.4em;
-    border-radius: 10px;
+    padding: 0.3em 3.8em;
+    border-radius: 20px;
 }
 
+.date-span {
+    margin-right: 2em;
+}
