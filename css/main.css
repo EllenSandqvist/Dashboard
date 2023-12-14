@@ -18,7 +18,7 @@ body {
 }  
 
 h1, h2, h3, p {
-    font-family: 'Work Sans', sans-serif;
+    font-family: 'Josefin Sans', sans-serif;
 }
 
 h1 {
@@ -30,6 +30,14 @@ h1 {
 h2 {
     font-size: 1.8rem;
     font-weight: 300;
+}
+
+p  {
+    font-size: 1.2rem;
+}
+
+button {
+    font-size: 1rem;
 }
 
 .container {
@@ -56,8 +64,8 @@ section{
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 2em 0.5em;
-    gap: 0.5em;
+    padding: 1.5em 0.5em;
+    gap: 0.8em;
 }
 
 /* --- Render Back ground button --- */
@@ -85,4 +93,47 @@ section{
 
 .date-span {
     margin-right: 2em;
+}
+
+/* --- Quote section --- */
+.quote-div {
+    font-size: 1.12rem;
+    background-color: white;
+    width: 100%;
+    height: 85%;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: end;
+    box-shadow: 0 0 0.8rem rgba(0, 0, 0, .5);
+    position: relative;
+}
+
+.start-quote {
+    font-size: 8rem;
+    position: absolute;
+    top: 0;
+    left: 5%;
+    color: rgba(100, 58, 122, .2);
+}
+
+.quote-para {
+    width: 80%;
+    margin-bottom: 10%;
+    font-family: 'Dancing Script', cursive;
+    font-size: 2rem;
+}
+
+.author-para {
+    width: 88%;
+    text-align: right;
+    margin-bottom: 10%;
+    font-weight: 300;
+}
+
+.author-para::before {
+    content: "⸛ ";
+    vertical-align: middle;
+    font-size: 1.6rem;
 }
