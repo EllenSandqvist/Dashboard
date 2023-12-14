@@ -5,26 +5,35 @@ async function updateQuote() {
     //Convert response to JavaScript
     const data = await response.json();
     if (response.ok) {
-      console.log(data);
-      displayResult(data);
+      //function to check quote length
+      checkQuoteLength(data);
     } else {
         console.log("Fetch error: ", error);
     }
   }
 updateQuote();
 
+function checkQuoteLength(quote){
+    if (quote.content.length > 90) {
+        updateQuote();
+    } else {
+        //if quote length <= 90 display quote
+        displayResult(quote);
+    }
+}
+
 function displayResult(quote){
-    const cardQuote = document.getElementById('card-quote');
-    const quoteText = document.createElement('div');
-    quoteText.classList.add('quote-text');
+    const quoteDiv = document.querySelector('.quote-div');
+    
     const quotePara = document.createElement('p');
+    quotePara.classList.add('quote-para');
+    
     const authorPara = document.createElement('p');
+    authorPara.classList.add('author-para');
 
     quotePara.textContent = quote.content; 
-    quoteText.appendChild(quotePara);
+    quoteDiv.appendChild(quotePara);
 
-    authorPara.textContent = " ~ " + quote.author;
-    quoteText.appendChild(authorPara);
-
-    cardQuote.appendChild(quoteText);
+    authorPara.textContent = quote.author;
+    quoteDiv.appendChild(authorPara);
 }
