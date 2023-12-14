@@ -7,17 +7,17 @@ function renderNotes() {
     noteBoard.textContent = noteText;
 }
 
-//eventlistener on notes that "listens" to input
-noteBoard.addEventListener('input', (event) => {
-    // event.preventDefault();
+//eventlistener on noteboard that "listens" to input
+noteBoard.addEventListener('input', () => {
     noteText = noteBoard.value;
     
-    addToLocalStorage(noteText);
+    //function for saving notes on localStorage
+    saveToLocalStorage(noteText);
+
     renderNotes();
 });
 
-//function for adding notes to localStorage
-function addToLocalStorage(text) {
+function saveToLocalStorage(text) {
     localStorage.setItem('notes', text);
 }
 
@@ -34,4 +34,5 @@ deleteNotesBtn.addEventListener('click', () => {
 })
 
 renderNotes();
+
 
