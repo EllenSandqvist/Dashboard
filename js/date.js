@@ -8,7 +8,9 @@ function showCurrentTime(){
     const currentDate = new Date();
 
     //get current time
-    const time = currentDate.getHours() + ":" + currentDate.getMinutes();
+    const hours = currentDate.getHours();
+    const minutes = currentDate.getMinutes();
+    const time = (hours < 10? "0" : "") + hours + ":" + (minutes < 10? "0" : "") + minutes;
 
     //get date of the month
     const dateOfMonth = currentDate.getDate();
