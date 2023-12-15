@@ -24,9 +24,6 @@ async function fetchData() {
     }
 }
 
-//Function call to generate first background when page loads
-fetchData();
-
 //----------------------------------------------
 function renderBackground(payload){
     const backgroundImg = payload.urls.regular;
