@@ -4,7 +4,7 @@ let noteText = localStorage.getItem('notes') || '';
 
 //function to render notes
 function renderNotes() {
-    noteBoard.textContent = noteText;
+    noteBoard.value = noteText;
 }
 
 //eventlistener on noteboard that "listens" to input
@@ -13,8 +13,6 @@ noteBoard.addEventListener('input', () => {
     
     //function for saving notes on localStorage
     saveToLocalStorage(noteText);
-
-    renderNotes();
 });
 
 function saveToLocalStorage(text) {
@@ -28,8 +26,7 @@ deleteNotesBtn.addEventListener('click', () => {
     if (confirmDelete) {
         localStorage.clear();
         noteText = '';
-        /*renderNotes(); //FIXME - Varför funkar det först vid omladdninga av sidan?*/
-        location.reload();
+        renderNotes(); 
     }
 })
 
