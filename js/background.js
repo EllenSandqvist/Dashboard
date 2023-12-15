@@ -34,6 +34,7 @@ function renderBackground(payload){
 //----------------------------------------------
 function attributePhotographer(payload){
     const photoPara = document.getElementById('photo-para');
+    photoPara.classList.add('photo-text');
     const photographerPortfolio = payload.user.portfolio_url;
 
     if(photographerPortfolio) {
