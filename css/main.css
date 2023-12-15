@@ -15,6 +15,7 @@ body {
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
+    position: relative;
 }  
 
 h1, h2, h3, p {
@@ -68,7 +69,17 @@ section{
     gap: 0.8em;
 }
 
-/* --- Render Back ground button --- */
+/* --- Background section --- */
+#photo-para, a {
+    color: #d7dcd6;
+ }
+
+ #photo-para {
+    position: absolute;
+    bottom: 0;
+    right: 3%;
+ }
+
 .bg-button {
     background-color: rgba(255, 255, 255, 0.6);
     padding: 0.4em;
@@ -138,3 +149,4 @@ section{
     vertical-align: middle;
     font-size: 1.6rem;
 }
+
