@@ -16,6 +16,8 @@ body {
     justify-content: space-between;
     align-items: center;
     position: relative;
+    background-size: cover;
+    background-repeat: no-repeat;
 }  
 
 h1, h2, h3, p {
@@ -26,6 +28,8 @@ h1 {
     font-size: 4rem;
     color: #d7dcd6;
     font-weight: 800;
+    /* Text-shadow is used to ensure visibility*/
+    text-shadow: -2px -2px 0 black, 2px -2px 0 black, -2px 2px 0 black, 2px 2px 0 black;
 }
 
 h2 {
@@ -60,7 +64,7 @@ section{
 .card {
     width: 25%;
     height: 43vh;
-    background-color: rgba(255, 255, 255, 0.6);
+    background-color: rgba(255, 255, 255, 0.7);
     border-radius: 20px;
     display: flex;
     flex-direction: column;
@@ -70,18 +74,21 @@ section{
 }
 
 /* --- Background section --- */
-#photo-para, a {
-    color: #d7dcd6;
- }
-
- #photo-para {
+#photo-para {
     position: absolute;
     bottom: 0;
     right: 3%;
- }
+    background-color: white;
+    padding: 0.2em;
+    font-size: 0.9rem;
+}
+
+#photo-para a {
+    color: black;
+}
 
 .bg-button {
-    background-color: rgba(255, 255, 255, 0.6);
+    background-color: rgba(255, 255, 255, 0.7);
     padding: 0.4em;
     border-radius: 10px;
 }
