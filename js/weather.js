@@ -8,4 +8,11 @@
     // 4. ev display wind speed, gust and direction 
         // 4a. Use if-statement to chose right wind arraw depending on wind degree
 // todo use date for timedisplay and listen for change - on change fetch new weatherData
+//* test funktion för att kolla om funktionsanropet från date.js funkar:
+// function fetchWeather(){
+//     console.log("nu körs jag!")
+// }
+
+
+
 // todo modal with info about weather forecast i.e. tomorrows weather is the forecast for the weather in 24h...

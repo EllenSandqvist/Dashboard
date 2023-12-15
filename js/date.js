@@ -28,6 +28,26 @@ function showCurrentTime(){
     //get current year
     let year = currentDate.getFullYear();
 
-    dateDisplay.innerHTML = `<p><strong class="date-span">${time}</strong> ${dateOfMonth} ${month} ${year}</p>`;
+    dateDisplay.innerHTML = `<p><strong class="date-span">${time}</strong> <span id="dateOfMonth-span">${dateOfMonth}</span> ${month} ${year}</p>`;
     this.setTimeout(()=>{showCurrentTime()}, 20_000);
+
+    // todo this belongs to check date for weather update:
+    // const dateOfMonthSpan = document.getElementById('dateOfMonth-span');
+    // const dateSpan = document.querySelector('.date-span').textContent;
+    // console.log(dateSpan);
+    // checkNewDate(dateOfMonthSpan);
+    // checkNewTime(dateSpan);
 };
+
+//todo Behöver göra nåt liknande som nedan men med MutationObserver!
+// function checkNewDate(date) {
+//     date.addEventListener('change', () => {
+//         fetchWeather();
+//     })
+// }
+
+// function checkNewTime(date) {
+//     date.addEventListener('change', ()=>{
+//         fetchWeather();
+//     })
+// }
