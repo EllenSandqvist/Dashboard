@@ -25,7 +25,7 @@ async function fetchData() {
 }
 
 //Function call to generate first background when page loads
-// fetchData();
+fetchData();
 
 //----------------------------------------------
 function renderBackground(payload){
