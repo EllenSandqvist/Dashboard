@@ -78,12 +78,15 @@ section{
     position: absolute;
     bottom: 0;
     right: 3%;
+}
+
+.photo-text {
     background-color: white;
     padding: 0.2em;
     font-size: 0.9rem;
 }
 
-#photo-para a {
+.photo-text a {
     color: black;
 }
 
