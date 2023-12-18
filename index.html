@@ -25,28 +25,31 @@
     <div class="container">
         <h1 contenteditable="true">Ellen Dashboard</h1>
         <section>
-            <article class="card" id="card_links">
-                <h2>Snabblänkar</h2>
-                <button>Lägg till länk</button>
-            </article>
-            
-            <article class="card" id="card_weather">
-                <h2>Dagens Väder</h2>
-                <div class="weather-div"></div>
-            </article>
+            <div class="row1">
+                <article class="card" id="card_links">
+                    <h2>Snabblänkar</h2>
+                    <button>Lägg till länk</button>
+                </article>
+                
+                <article class="card" id="card_weather">
+                    <h2>Dagens Väder</h2>
+                    <div class="weather-div"></div>
+                </article>
+            </div>
+            <div class="row2">
+                <article class="card" id="card-quote">
+                    <h2>Dagens Citat</h2>
+                    <div class="quote-div">
+                        <i class="start-quote fas fa-quote-left"></i>
+                    </div>
+                </article>
 
-            <article class="card" id="card-quote">
-                <h2>Dagens Citat</h2>
-                <div class="quote-div">
-                    <i class="start-quote fas fa-quote-left"></i>
-                </div>
-            </article>
-
-            <article class="card" id="card_notes">
-                <h2>Anteckningar</h2>
-                <textarea name="notes" id="note-board" cols="30" rows="25" placeholder="Skriv anteckningar här..."></textarea>
-                <button id="delete-notes"><i class="fa-regular fa-trash-can"></i> Radera</button>
-            </article>
+                <article class="card" id="card_notes">
+                    <h2>Anteckningar</h2>
+                    <textarea name="notes" id="note-board" cols="30" rows="25" placeholder="Skriv anteckningar här..."></textarea>
+                    <button id="delete-notes"><i class="fa-regular fa-trash-can"></i> Radera</button>
+                </article>
+            </div> 
         </section>
     </div>
     <button class="bg-button"><i class="fa-solid fa-arrow-rotate-right"></i> Slumpa ny bakgrund</button>
