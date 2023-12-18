@@ -1,3 +1,6 @@
+//import apiKey from config.js 
+import { apiKey } from "./config.js";
+
 //if statement to check if user browser supports geolocation
 if(!navigator.geolocation) {
     console.log("Geolocation is not supported by your browser");
@@ -8,7 +11,6 @@ if(!navigator.geolocation) {
 
 // use browser geolocation api to get users location
 function success(position) {
-    const apiKey = "ea8b9b802d78dd4cf2eea6e36255a0ac";
     const userLat = position.coords.latitude;
     const userLon = position.coords.longitude;
 
