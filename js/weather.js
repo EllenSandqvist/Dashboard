@@ -1,5 +1,50 @@
-// todo use browser geolocation api to get users location
-//todo fetch weatherData for user location
+//if statement to check if user browser supports geolocation
+if(!navigator.geolocation) {
+    console.log("Geolocation is not supported by your browser");
+} else {
+    //if supported run function to get user position
+    navigator.geolocation.getCurrentPosition(success, error);
+}
+
+// use browser geolocation api to get users location
+function success(position) {
+    const apiKey = "ea8b9b802d78dd4cf2eea6e36255a0ac";
+    const userLat = position.coords.latitude;
+    const userLon = position.coords.longitude;
+
+    console.log(userLat, userLon);
+
+    /* added one parameter for unit selection and one to limit the API response to cover 3 days  */ 
+    const userApiUrl = `https://api.openweathermap.org/data/2.5/forecast?lat=${userLat}&lon=${userLon}&units=metric&lang=sv&cnt=24&appid=${apiKey}`;
+
+    // call function to get forecast
+    getForecast(userApiUrl);
+}
+
+function error() {
+    console.log("Unable to retrieve your location");
+    alert(`ERROR(${error.code}): ${error.message}`);
+}
+
+
+//fetch weather forecast for user location
+async function getForecast(apiUrl) {
+    const weatherDiv = document.querySelector('.weather-div');
+    
+    let response = await fetch(apiUrl);
+
+    if(response.ok){
+        console.log(response.ok);
+
+        const userForecast = await response.json();
+        console.log(userForecast);
+    } else {
+        console.log("HTTP-errors: " + response.status);
+        const weatherPara = document.createElement('p');
+        weatherPara.textContent = "Kunde inte hämta väderprognos, Error: " + response.status;
+        weatherDiv.appendChild(weatherPara);
+    }
+}
 // ev. find out how to handle passing midnight 
 //todo render relevant weather data on page
     // 1. if-statement to check what img to display and ev. belonging text
