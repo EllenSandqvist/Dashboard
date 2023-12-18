@@ -2,11 +2,12 @@ async function updateQuote() {
     // Fetch a random quote from the Quotable API
     const response = await fetch("https://api.quotable.io/random");
 
-    //Convert response to JavaScript
-    const data = await response.json();
     if (response.ok) {
-      //function to check quote length
-      checkQuoteLength(data);
+       //Convert response to JavaScript
+       const data = await response.json();
+
+       //function to check quote length
+       checkQuoteLength(data);
     } else {
         console.log("Fetch error: ", error);
     }
