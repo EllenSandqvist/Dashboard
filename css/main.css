@@ -109,16 +109,6 @@ section{
     border-radius: 10px;
 }
 
-/* --- Note Board section --- */
-#note-board {
-    background-color: rgba(255, 255, 255, 0.5);
-    border-radius: 10px;
-    border: none;
-    width: 100%;
-    font-size: 1.1rem;
-    padding: 0.3em;
-}
-
 /* --- Date/Time section --- */
 .date {
     background-color: rgba(255, 255, 255, 0.6);
@@ -128,6 +118,22 @@ section{
 
 .date-span {
     margin-right: 2em;
+}
+
+/* --- Weather section --- */
+.weather-div {
+    width: 100%;
+    height: 95%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+
+.weather-display {
+    background-color: rgba(255, 255, 255, 0.5);
+    width: 90%;
+    height: 15 vh;
+    
 }
 
 /* --- Quote section --- */
@@ -171,6 +177,16 @@ section{
     content: "⸛ ";
     vertical-align: middle;
     font-size: 1.6rem;
+}
+
+/* --- Note Board section --- */
+#note-board {
+    background-color: rgba(255, 255, 255, 0.5);
+    border-radius: 10px;
+    border: none;
+    width: 100%;
+    font-size: 1.1rem;
+    padding: 0.3em;
 }
 
 /* ----------- Media Query 1 ----------- */
