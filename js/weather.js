@@ -80,35 +80,44 @@ function filterForecast(data){
     console.log(threeDayForecast);
 
     renderForcast(threeDayForecast);
-
-    //todo remove this below - Hårdkodat för att få ut vädret!
-    // const weatherToday = document.getElementById('today');
-    // const tempToday = Math.round(data.list[0].main.temp);
-    // weatherToday.innerHTML = `<h3>Idag</h3>\n ${tempToday}&deg`;
-    // const weatherTomorrow = document.getElementById('tomorrow');
-    // const tempTomorrow = Math.round(data.list[8].main.temp);
-    // weatherTomorrow.innerHTML = `<h3>Imorgon</h3>\n ${tempTomorrow}&deg`;
-
-    // const weatherDay3 = document.getElementById('day3');
-    // const tempDay3 = Math.round(data.list[16].main.temp);
-    // weatherDay3.innerHTML = `<h3>Iövermorgon</h3>\n ${tempDay3}&deg`;
 }
 
-// todo Use forEach to render weather for three days!
+// Use forEach to render weather for three days!
 function renderForcast(array) {
     array.forEach(function(element, index){
-        console.log(element, index);
+        const weatherDisplay = document.getElementById(`weather${index}`)
+        const weatherHeading = renderForecastDay(index);
+
+        weatherDisplay.innerHTML = 
+            `<h3>${weatherHeading}</h3>
+            <img class="weather-icon" src="https://openweathermap.org/img/wn/${element.weather[0].icon}@2x.png">
+            <p class="weather-temp">${Math.round(element.main.temp)}&deg</p>
+            <p class="weather-description">${element.weather[0].description}</p>`
     })
 }
+
+function renderForecastDay(index){
+    if(index === 0) {
+        return "Idag";
+    } else if (index === 1) {
+        return "Imorgon";
+    } else {
+        const day3 = new Date();
+        day3.setDate(day3.getDate() + 2);
+        
+        const weekdays = [
+            "Söndag", "Måndag", "Tisdag",
+            "Onsdag", "Torsdag", "Fredag", "Lördag"
+        ];
+
+        return weekdays[day3.getDay()];
+    }
+}
+
 // ev. find out how to handle passing midnight 
 //todo render relevant weather data on page
-    // 1. if-statement to check what img to display and ev. belonging text
-    // 2. display date/day
-    // 3. display temperature
     // 4. ev display wind speed, gust and direction 
         // 4a. Use if-statement to chose right wind arraw depending on wind degree
 // todo use date for timedisplay and if-statement to check if date was changed - on change fetch new weatherData
-
-
 
 // todo modal with info about weather forecast i.e. tomorrows weather is the forecast for the weather in 24h...
