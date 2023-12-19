@@ -19,8 +19,8 @@ function success(position) {
 
     console.log(userLat, userLon);
 
-    /* added one parameter for unit selection and one to limit the API response to cover 3 days  */ 
-    const userApiUrl = `https://api.openweathermap.org/data/2.5/forecast?lat=${userLat}&lon=${userLon}&units=metric&lang=sv&cnt=24&appid=${apiKey}`;
+    /* added one parameter for unit selection and one to limit the API response to cover needed days and times  */ 
+    const userApiUrl = `https://api.openweathermap.org/data/2.5/forecast?lat=${userLat}&lon=${userLon}&units=metric&lang=sv&cnt=21&appid=${apiKey}`;
 
     // call function to get forecast
     getForecast(userApiUrl);
@@ -41,26 +41,8 @@ async function getForecast(apiUrl) {
 
     if(response.ok){
         const userForecast = await response.json();
-        console.log(userForecast);
-        renderForecast(userForecast);
-
-        //todo filter out the forecast for 12 o'clock tomorrow and the day after
-        // todo check how many days were included in cnt = 3
-        // todo split forecast list so that 12:00:00 for current day is not included
-        /* const desiredTime = "12:00:00"
-
-        const forecastList = userForecast.list;
-        console.log(forecastList);
-
-        const weatherAtMidday = forecastList.filter(data => {
-            const dataAtDesiredTime = data.dt_txt.split(' ');
-            console.log(dataAtDesiredTime);
-
-            return dataAtDesiredTime[1] === desiredTime; 
-        })
-
-        console.log(weatherAtMidday); */
-
+        console.log("This is the fetched list: ", userForecast);
+        filterForecast(userForecast);
 
     } else {
         console.log("HTTP-errors: " + response.status);
@@ -70,22 +52,54 @@ async function getForecast(apiUrl) {
     }
 }
 
-function renderForecast(data){
-    const weatherToday = document.getElementById('today');
-    const tempToday = Math.round(data.list[0].main.temp);
-    weatherToday.innerHTML = `<h3>Idag</h3>\n ${tempToday}&deg`;
+function filterForecast(data){
+    //today will display the first list item i.e. the weather forecast for the following 3-6 hours.
+    const today = [data.list[0]];
+   
+    //the weather for tomorrow and day3 will show the forecast for the weather at noon
+    //use Date() object and add 1 to get the date for tomorrow
+    const tomorrow = new Date();
+    tomorrow.setDate(tomorrow.getDate() + 1);
+    //set the time to noon
+    tomorrow.setHours(12, 0, 0, 0);
+    //console.log to make sure date format matches that in the fetched forecast list 
+    console.log(tomorrow.toLocaleString());
 
-    const weatherTomorrow = document.getElementById('tomorrow');
-    const tempTomorrow = Math.round(data.list[8].main.temp);
-    weatherTomorrow.innerHTML = `<h3>Imorgon</h3>\n ${tempTomorrow}&deg`;
+    const day3 = new Date();
+    day3.setDate(day3.getDate() + 2);
+    day3.setHours(12, 0, 0, 0);
+    console.log(day3.toLocaleString());
 
-    const weatherDay3 = document.getElementById('day3');
-    const tempDay3 = Math.round(data.list[16].main.temp);
-    weatherDay3.innerHTML = `<h3>Iövermorgon</h3>\n ${tempDay3}&deg`;
+    //filter the fetched list to only contain the forecast for noon tomorrow and day3
+    const nextTwoDaysForecast = data.list.filter(forecast => {
+        return forecast.dt_txt === tomorrow.toLocaleString() || forecast.dt_txt === day3.toLocaleString();
+    })
+
+    //concat the arrays for today and the next two days in the forecast for three days
+    const threeDayForecast = today.concat(nextTwoDaysForecast);
+    console.log(threeDayForecast);
+
+    renderForcast(threeDayForecast);
+
+    //todo remove this below - Hårdkodat för att få ut vädret!
+    // const weatherToday = document.getElementById('today');
+    // const tempToday = Math.round(data.list[0].main.temp);
+    // weatherToday.innerHTML = `<h3>Idag</h3>\n ${tempToday}&deg`;
+    // const weatherTomorrow = document.getElementById('tomorrow');
+    // const tempTomorrow = Math.round(data.list[8].main.temp);
+    // weatherTomorrow.innerHTML = `<h3>Imorgon</h3>\n ${tempTomorrow}&deg`;
+
+    // const weatherDay3 = document.getElementById('day3');
+    // const tempDay3 = Math.round(data.list[16].main.temp);
+    // weatherDay3.innerHTML = `<h3>Iövermorgon</h3>\n ${tempDay3}&deg`;
 }
 
-const myDate = new Date().toLocaleString();
-console.log(myDate);
+// todo Use forEach to render weather for three days!
+function renderForcast(array) {
+    array.forEach(function(element, index){
+        console.log(element, index);
+    })
+}
 // ev. find out how to handle passing midnight 
 //todo render relevant weather data on page
     // 1. if-statement to check what img to display and ev. belonging text
