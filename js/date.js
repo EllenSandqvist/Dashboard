@@ -3,6 +3,7 @@ window.addEventListener('load', showCurrentTime);
 
 // ! O.B.S! Kom ihåg att ändra till date när funktionen verkar funka!
 let previousMin = null;
+//! ------------------------------------
 
 function showCurrentTime(){
     const dateDisplay = document.querySelector('.date');
@@ -48,6 +49,7 @@ function showCurrentTime(){
 
             previousMin = minutes;
         }
+        //! ------------------------------------
     }, 20_000);  
 };
 
