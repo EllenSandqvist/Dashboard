@@ -89,10 +89,14 @@ function renderForcast(array) {
         const weatherHeading = renderForecastDay(index);
 
         weatherDisplay.innerHTML = 
-            `<h3>${weatherHeading}</h3>
-            <img class="weather-icon" src="https://openweathermap.org/img/wn/${element.weather[0].icon}@2x.png">
-            <p class="weather-temp">${Math.round(element.main.temp)}&deg</p>
-            <p class="weather-description">${element.weather[0].description}</p>`
+           `<img class="weather-icon" src="https://openweathermap.org/img/wn/${element.weather[0].icon}@2x.png"></img>
+            <div class="weather-text">
+                <h3>${weatherHeading}</h3>
+                <div class="weather-para">
+                    <p class="weather-temp">${Math.round(element.main.temp)}&deg</p>
+                    <p class="weather-description">${element.weather[0].description}</p>
+                <div>
+            </div>`
     })
 }
 
