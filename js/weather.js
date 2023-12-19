@@ -1,7 +1,6 @@
 //import apiKey from config.js 
 import { apiKey } from "./config.js";
 
-
 // -------- Geolocation section ---------------
 
 //if statement to check if user browser supports geolocation
@@ -16,10 +15,10 @@ if(!navigator.geolocation) {
 function success(position) {
     const userLat = position.coords.latitude;
     const userLon = position.coords.longitude;
-
     console.log(userLat, userLon);
 
-    /* added one parameter for unit selection and one to limit the API response to cover needed days and times  */ 
+    /* added one parameter for language, one for unit selection and 
+    one to limit the API response to only cover needed days and times*/ 
     const userApiUrl = `https://api.openweathermap.org/data/2.5/forecast?lat=${userLat}&lon=${userLon}&units=metric&lang=sv&cnt=21&appid=${apiKey}`;
 
     // call function to get forecast
@@ -42,8 +41,8 @@ async function getForecast(apiUrl) {
     if(response.ok){
         const userForecast = await response.json();
         console.log("This is the fetched list: ", userForecast);
+        
         filterForecast(userForecast);
-
     } else {
         console.log("HTTP-errors: " + response.status);
         const weatherPara = document.createElement('p');
@@ -82,7 +81,7 @@ function filterForecast(data){
     renderForcast(threeDayForecast);
 }
 
-// Use forEach to render weather for three days!
+// Use forEach to render weather for three days
 function renderForcast(array) {
     array.forEach(function(element, index){
         const weatherDisplay = document.getElementById(`weather${index}`)
@@ -117,6 +116,7 @@ function renderForecastDay(index){
         return weekdays[day3.getDay()];
     }
 }
+
 
 // ev. find out how to handle passing midnight 
 //todo render relevant weather data on page

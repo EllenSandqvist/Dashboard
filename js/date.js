@@ -1,6 +1,9 @@
 //eventlistener with a function that starts when window is loaded
 window.addEventListener('load', showCurrentTime);
 
+// ! O.B.S! Kom ihåg att ändra till date när funktionen verkar funka!
+let previousMin = null;
+
 function showCurrentTime(){
     const dateDisplay = document.querySelector('.date');
 
@@ -22,32 +25,36 @@ function showCurrentTime(){
         "Juli","Augusti","September",
         "Oktober","November","December"
     ];
-    /* date.getMonth returns a number 0-11, months[...] are used to convert this to the actual month */
+    /* date.getMonth returns a number 0-11, months[...] are used 
+    to convert this to the actual month */
     let month = months[currentDate.getMonth()];
 
     //get current year
     let year = currentDate.getFullYear();
 
-    dateDisplay.innerHTML = `<p><strong class="date-span">${time}</strong> <span id="dateOfMonth-span">${dateOfMonth}</span> ${month} ${year}</p>`;
-    this.setTimeout(()=>{showCurrentTime()}, 20_000);
+    dateDisplay.innerHTML = 
+        `<p>
+            <strong class="date-span">${time}</strong> 
+            <span id="dateOfMonth-span">${dateOfMonth}</span> 
+            ${month} ${year}
+        </p>`;
 
-    // todo this belongs to check date for weather update:
+    setTimeout(() => {
+        showCurrentTime();
+
+        // ! O.B.S! Kom ihåg att ändra till date när funktionen verkar funka!
+        if(previousMin !== minutes){
+            console.log("Nu ska vädret uppdateras!");
+
+            previousMin = minutes;
+        }
+    }, 20_000);  
+};
+
+
+// todo this belongs to check date for weather update:
     // const dateOfMonthSpan = document.getElementById('dateOfMonth-span');
     // const dateSpan = document.querySelector('.date-span').textContent;
     // console.log(dateSpan);
     // checkNewDate(dateOfMonthSpan);
     // checkNewTime(dateSpan);
-};
-
-//todo Behöver göra nåt liknande som nedan men med MutationObserver!
-// function checkNewDate(date) {
-//     date.addEventListener('change', () => {
-//         fetchWeather();
-//     })
-// }
-
-// function checkNewTime(date) {
-//     date.addEventListener('change', ()=>{
-//         fetchWeather();
-//     })
-// }
