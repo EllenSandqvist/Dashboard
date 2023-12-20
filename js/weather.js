@@ -3,19 +3,6 @@ import { apiKey } from "./config.js";
 
 const weatherDiv = document.querySelector('.weather-div');
 
-//function to update forecast on button click
-const weatherBtn = document.getElementById('weather-button');
-weatherBtn.addEventListener('click', function(){
-    const updateText = document.createElement('p');
-    updateText.innerHTML = `<p>Vädret uppdateras...</p>`;
-    weatherDiv.appendChild(updateText);
-    setTimeout(()=>{
-        console.log("uppdaterar prognos!");
-        updateText.remove();
-        getUserLocation();
-    }, 1000);
-});
-
 getUserLocation();
 
 // -------- Geolocation section ---------------
@@ -68,6 +55,7 @@ async function getForecast(lat, lon) {
         weatherDiv.appendChild(weatherPara);
     }
 }
+// --------------------------------------------
 
 function filterForecast(data){
     //today will display the first list item i.e. the weather forecast for the following 3-6 hours.
@@ -98,6 +86,7 @@ function filterForecast(data){
 
     renderForcast(threeDayForecast);
 }
+// --------------------------------------------
 
 // Use forEach to render weather for three days
 function renderForcast(array) {
@@ -116,6 +105,7 @@ function renderForcast(array) {
             </div>`
     })
 }
+// --------------------------------------------
 
 function renderForecastDay(index){
     if(index === 0) {
@@ -134,12 +124,27 @@ function renderForecastDay(index){
         return weekdays[day3.getDay()];
     }
 }
+// --------------------------------------------
 
+//function to update forecast on button click
+const weatherBtn = document.getElementById('weather-button');
+weatherBtn.addEventListener('click', function(){
+    const updateText = document.createElement('p');
+    updateText.innerHTML = `<p>Vädret uppdateras...</p>`;
+    weatherDiv.appendChild(updateText);
+    setTimeout(()=>{
+        console.log("uppdaterar prognos!");
+        updateText.remove();
+        getUserLocation();
+    }, 1000);
+});
+// --------------------------------------------
 
-// ev. find out how to handle passing midnight 
-//todo render relevant weather data on page
-    // 4. ev display wind speed, gust and direction 
-        // 4a. Use if-statement to chose right wind arraw depending on wind degree
-// todo use date for timedisplay and if-statement to check if date was changed - on change fetch new weatherData
+//function to show info modal
+const infoIcon = document.querySelector('.fa-circle-info');
+const infoModal =document.getElementById('forecast-info');
+infoIcon.addEventListener('click',()=>infoModal.classList.remove('modal-hidden'));
 
-// todo modal with info about weather forecast i.e. tomorrows weather is the forecast for the weather in 24h...
+//function to hide info modal
+const closeModal = document.querySelector('.close');
+closeModal.addEventListener('click',()=>infoModal.classList.add('modal-hidden'));
