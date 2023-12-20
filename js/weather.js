@@ -1,11 +1,28 @@
 //import apiKey from config.js 
 import { apiKey } from "./config.js";
 
-// -------- Geolocation section ---------------
+const weatherDiv = document.querySelector('.weather-div');
 
+
+//function to update forecast
+const weatherBtn = document.getElementById('weather-button');
+weatherBtn.addEventListener('click', function(){
+    const updateText = document.createElement('p');
+    updateText.innerHTML = `<p>Vädret uppdateras...</p>`;
+    weatherDiv.appendChild(updateText);
+    setTimeout(()=>{
+        console.log("uppdaterar prognos!");
+        updateText.remove();
+        navigator.geolocation.getCurrentPosition(success, error);
+    }, 1000);
+});
+
+// -------- Geolocation section ---------------
 //if statement to check if user browser supports geolocation
 if(!navigator.geolocation) {
     console.log("Geolocation is not supported by your browser");
+    //remove update forecast button if geolocation is not supported
+    weatherBtn.remove();
 } else {
     //if supported run function to get user position
     navigator.geolocation.getCurrentPosition(success, error);
@@ -17,12 +34,8 @@ function success(position) {
     const userLon = position.coords.longitude;
     console.log(userLat, userLon);
 
-    /* added one parameter for language, one for unit selection and 
-    one to limit the API response to only cover needed days and times*/ 
-    const userApiUrl = `https://api.openweathermap.org/data/2.5/forecast?lat=${userLat}&lon=${userLon}&units=metric&lang=sv&cnt=21&appid=${apiKey}`;
-
     // call function to get forecast
-    getForecast(userApiUrl);
+    getForecast(userLat, userLon);
 }
 
 function error() {
@@ -33,10 +46,13 @@ function error() {
 
 
 //fetch weather forecast for user location
-async function getForecast(apiUrl) {
-    const weatherDiv = document.querySelector('.weather-div');
-    
-    let response = await fetch(apiUrl);
+async function getForecast(lat, lon) {
+
+    /* added one parameter for language, one for unit selection and 
+    one to limit the API response to only cover needed days and times*/ 
+    const userApiUrl = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&units=metric&lang=sv&cnt=21&appid=${apiKey}`;
+
+    let response = await fetch(userApiUrl);
 
     if(response.ok){
         const userForecast = await response.json();
