@@ -40,7 +40,10 @@
                         <div id="weather1" class="weather-display"></div>
                         <div id="weather2" class="weather-display"></div>
                     </div>
-                    <button id="weather-button"><i class="fa-solid fa-arrow-rotate-right"></i> Uppdatera prognos</button>
+                    <div class="weather-btn-i">
+                        <button id="weather-button"><i class="fa-solid fa-arrow-rotate-right"></i> Uppdatera prognos</button>
+                        <i class="fa-solid fa-circle-info"></i>
+                    </div>
                 </article>
             </div>
             <div class="row2">
@@ -61,6 +64,15 @@
     </div>
     <button class="bg-button"><i class="fa-solid fa-arrow-rotate-right"></i> Slumpa ny bakgrund</button>
     <p id="photo-para"></p>
+
+    <!-- Modal - info about weather forecast -->
+    <div id="forecast-info" class="modal modal-hidden">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h3>Info om Dagens Väder</h3>
+            <p>Vädret för imorgon och nästkommande dag visar prognosen för kl. 12:00-15:00. Dagens väder visar prognosen för de kommande 3-6 timmarna. Prognosen uppdateras automatiskt vid midnatt.</p>
+        </div>
+    </div>
     <!-- Script for icons -->
     <script src="https://kit.fontawesome.com/dfb17be9bd.js" crossorigin="anonymous"></script>
 </body>
