@@ -4,14 +4,8 @@ import {getUserLocation} from './weather.js';
 //eventlistener with a function that starts when window is loaded
 window.addEventListener('load', showCurrentTime);
 
-<<<<<<< HEAD
-// ! O.B.S! Kom ihåg att ändra till date när funktionen verkar funka!
-let previousMin = null;
-//! ------------------------------------
-=======
 //variable to check if it's a new day and weather forecast needs an update 
 let initialDate = null;
->>>>>>> feature/weather
 
 function showCurrentTime(){
     const dateDisplay = document.querySelector('.date');
