@@ -3,16 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Din personliga Dashboard</title>
+
+    <!-- scripts JavaScript -->
     <script src="./js/h1-header.js" defer></script>
     <script src="./js/notes.js" defer></script>
     <script src="./js/daily-wisdom.js" defer></script>
     <script src="./js/background.js" defer></script>
+    <script src="./js/links.js" defer></script>
 
     <script type="module" src="./js/config.js" defer></script>
     <script type="module" src="./js/date.js" defer></script>
     <script type="module" src="./js/weather.js" defer></script>
     <link rel="stylesheet" href="./css/main.css">
-    <title>Document</title>
 
     <!-- Font links -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -30,7 +33,7 @@
             <div class="row1">
                 <article class="card" id="card_links">
                     <h2>Snabblänkar</h2>
-                    <button>Lägg till länk</button>
+                    <button id="add-link-button"><i class="fa-solid fa-circle-plus"></i> Lägg till länk</button>
                 </article>
                 
                 <article class="card" id="card_weather">
@@ -71,6 +74,20 @@
             <span class="close">&times;</span>
             <h3>Info om Dagens Väder</h3>
             <p>Vädret för imorgon och nästkommande dag visar prognosen för kl. 12:00-15:00. Dagens väder visar prognosen för de kommande 3-6 timmarna. Prognosen uppdateras automatiskt vid midnatt.</p>
+        </div>
+    </div>
+
+    <!-- Modal - form for adding links -->
+    <div id="link-modal" class="modal link-modal link-modal-hidden">
+        <div class="modal-content">
+            <span id="link-modal-close" class="close">&times;</span>
+            <h3>Lägg till länk</h3>
+            <p>Fyll i fälten nedan. <br>Under rubrik anger du det namn du vill ge din länk.</p>
+            <label for="link-name">Rubrik:</label><br>
+            <input type="text" id="link-name" required><br>
+            <label for="link-url">Länk:</label><br>
+            <input type="url" id="link-url" placeholder="t.ex. www.dinsida.se" required><br>
+            <button>Spara Länk!</button>
         </div>
     </div>
     <!-- Script for icons -->
