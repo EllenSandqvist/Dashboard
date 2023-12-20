@@ -1,9 +1,17 @@
+//import function from weather.js
+import {getUserLocation} from './weather.js';
+
 //eventlistener with a function that starts when window is loaded
 window.addEventListener('load', showCurrentTime);
 
+<<<<<<< HEAD
 // ! O.B.S! Kom ihåg att ändra till date när funktionen verkar funka!
 let previousMin = null;
 //! ------------------------------------
+=======
+//variable to check if it's a new day and weather forecast needs an update 
+let initialDate = null;
+>>>>>>> feature/weather
 
 function showCurrentTime(){
     const dateDisplay = document.querySelector('.date');
@@ -43,20 +51,14 @@ function showCurrentTime(){
     setTimeout(() => {
         showCurrentTime();
 
-        // ! O.B.S! Kom ihåg att ändra till date när funktionen verkar funka!
-        if(previousMin !== minutes){
-            console.log("Nu ska vädret uppdateras!");
-
-            previousMin = minutes;
+        /* if statement to check if it's a new day 
+        - if so call getUserLocation() to update weather */
+        if(initialDate !== dateOfMonth){
+            console.log("Det är inte längre dag " + initialDate + " i månaden. Uppdatera vädret!");
+            getUserLocation();
+            initialDate = dateOfMonth;
         }
-        //! ------------------------------------
+
+    //setTimeout will update time and date every 20th second
     }, 20_000);  
 };
-
-
-// todo this belongs to check date for weather update:
-    // const dateOfMonthSpan = document.getElementById('dateOfMonth-span');
-    // const dateSpan = document.querySelector('.date-span').textContent;
-    // console.log(dateSpan);
-    // checkNewDate(dateOfMonthSpan);
-    // checkNewTime(dateSpan);

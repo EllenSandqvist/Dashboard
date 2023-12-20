@@ -3,8 +3,7 @@ import { apiKey } from "./config.js";
 
 const weatherDiv = document.querySelector('.weather-div');
 
-
-//function to update forecast
+//function to update forecast on button click
 const weatherBtn = document.getElementById('weather-button');
 weatherBtn.addEventListener('click', function(){
     const updateText = document.createElement('p');
@@ -13,37 +12,40 @@ weatherBtn.addEventListener('click', function(){
     setTimeout(()=>{
         console.log("uppdaterar prognos!");
         updateText.remove();
-        navigator.geolocation.getCurrentPosition(success, error);
+        getUserLocation();
     }, 1000);
 });
 
+getUserLocation();
+
 // -------- Geolocation section ---------------
-//if statement to check if user browser supports geolocation
-if(!navigator.geolocation) {
-    console.log("Geolocation is not supported by your browser");
-    //remove update forecast button if geolocation is not supported
-    weatherBtn.remove();
-} else {
-    //if supported run function to get user position
-    navigator.geolocation.getCurrentPosition(success, error);
-}
+export function getUserLocation(){
+    //if statement to check if user browser supports geolocation
+    if(!navigator.geolocation) {
+        console.log("Geolocation is not supported by your browser");
+        //remove update forecast button if geolocation is not supported
+        weatherBtn.remove();
+    } else {
+        //if supported run function to get user position
+        navigator.geolocation.getCurrentPosition(success, error);
+    }
 
-// use browser geolocation api to get users location
-function success(position) {
-    const userLat = position.coords.latitude;
-    const userLon = position.coords.longitude;
-    console.log(userLat, userLon);
+    // use browser geolocation api to get users location
+    function success(position) {
+        const userLat = position.coords.latitude;
+        const userLon = position.coords.longitude;
+        console.log(userLat, userLon);
 
-    // call function to get forecast
-    getForecast(userLat, userLon);
-}
+        // call function to get forecast
+        getForecast(userLat, userLon);
+    }
 
-function error() {
-    console.log("Unable to retrieve your location");
-    alert(`ERROR(${error.code}): ${error.message}`);
+    function error() {
+        console.log("Unable to retrieve your location");
+        alert(`ERROR(${error.code}): ${error.message}`);
+    }
 }
 // -----------------------------------------------------------------
-
 
 //fetch weather forecast for user location
 async function getForecast(lat, lon) {
