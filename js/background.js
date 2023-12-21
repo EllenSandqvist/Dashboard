@@ -9,18 +9,22 @@ let backgroundObj = JSON.parse(localStorage.getItem('background')) || {};
 
 //render background and photographer info on page load
 renderBackground();
-attributePhotographer();
 
 //function to render background
 function renderBackground(){
-    const body = document.querySelector('body');
-    body.style.backgroundImage = `url(${backgroundObj.url})`;
+    if(backgroundObj.url){
+        const body = document.querySelector('body');
+        body.style.backgroundImage = `url(${backgroundObj.url})`;
+        attributePhotographer();
+    }
 };
 
 //----------------------------------------------
 function attributePhotographer(){
-    const photoPara = document.getElementById('photo-para');
+    const container = document.querySelector('.container');
+    const photoPara = document.createElement('p');
     photoPara.classList.add('photo-text');
+    container.appendChild(photoPara);
     
     if(backgroundObj.portfolio) {
         photoPara.innerHTML = `Photo by <a href=${backgroundObj.portfolio} target="_blank">${backgroundObj.user}</a> on <a href="https://unsplash.com/" target="_blank">Unsplash</a>`;
