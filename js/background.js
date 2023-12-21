@@ -1,46 +1,31 @@
 //My accessKey
-const accessKey = "izbaVrML58ENwVHhmd3YS1QfE2wxxl848ZOeIaJ9c0U";
+import { accessKey } from "./config.js";
 
 const apiUrl = 'https://api.unsplash.com/photos/random';
 
-//function to fetch data from unsplash API
-async function fetchData() {
-    try {
-        //try to fetch from api with a orientation parameter
-        const response = await fetch(`${apiUrl}?client_id=${accessKey}&orientation=landscape`);
+/* Get data from localStorage and store in backgroundObj if there is any, 
+otherwise set backgroundObj to an empty Object. */
+let backgroundObj = JSON.parse(localStorage.getItem('background')) || {};
 
-        //convert response to js
-        const data = await response.json();
-        console.log(data);
+//render background and photographer info on page load
+renderBackground();
+attributePhotographer();
 
-        //function to render background image
-        renderBackground(data);
-
-        //function to display photographer name and Unsplash link
-        attributePhotographer(data);
-
-    } catch (error) {
-        console.log('API-anrop misslyckades: ', error);
-    }
-}
-
-//----------------------------------------------
-function renderBackground(payload){
-    const backgroundImg = payload.urls.regular;
+//function to render background
+function renderBackground(){
     const body = document.querySelector('body');
-    body.style.backgroundImage = `url(${backgroundImg})`;
+    body.style.backgroundImage = `url(${backgroundObj.url})`;
 };
 
 //----------------------------------------------
-function attributePhotographer(payload){
+function attributePhotographer(){
     const photoPara = document.getElementById('photo-para');
     photoPara.classList.add('photo-text');
-    const photographerPortfolio = payload.user.portfolio_url;
-
-    if(photographerPortfolio) {
-        photoPara.innerHTML = `Photo by <a href=${photographerPortfolio} target="_blank">${payload.user.name}</a> on <a href="https://unsplash.com/" target="_blank">Unsplash</a>`;
+    
+    if(backgroundObj.portfolio) {
+        photoPara.innerHTML = `Photo by <a href=${backgroundObj.portfolio} target="_blank">${backgroundObj.user}</a> on <a href="https://unsplash.com/" target="_blank">Unsplash</a>`;
     } else {
-        photoPara.innerHTML = `Photo by ${payload.user.name} on <a href="https://unsplash.com/">Unsplash</a>`;
+        photoPara.innerHTML = `Photo by ${backgroundObj.user} on <a href="https://unsplash.com/">Unsplash</a>`;
     }
 }
 
@@ -52,3 +37,34 @@ const bgButton = document.querySelector('.bg-button');
 bgButton.addEventListener('click',()=>{
     fetchData();
 })
+
+//function to fetch data from unsplash API
+async function fetchData() {
+    try {
+        //try to fetch from api with a orientation parameter
+        const response = await fetch(`${apiUrl}?client_id=${accessKey}&orientation=landscape`);
+
+        //convert response to js
+        const data = await response.json();
+        console.log(data);
+
+        //store relevant info in objekt
+        backgroundObj = {
+            url: data.urls.regular,
+            portfolio: data.user.portfolio_url,
+            user: data.user.name
+        }
+
+        //save backgroundObj in localStorage
+        localStorage.setItem('background', JSON.stringify(backgroundObj));
+
+        //function to render background image
+        renderBackground();
+
+        //function to display photographer name and Unsplash link
+        attributePhotographer();
+
+    } catch (error) {
+        console.log('API-anrop misslyckades: ', error);
+    }
+}
