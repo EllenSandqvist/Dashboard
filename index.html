@@ -79,16 +79,16 @@
 
     <!-- Modal - form for adding links -->
     <div id="link-modal" class="modal link-modal link-modal-hidden">
-        <div class="modal-content">
+        <form class="modal-content">
             <span id="link-modal-close" class="close">&times;</span>
             <h3>Lägg till länk</h3>
             <p>Fyll i fälten nedan. <br>Under rubrik anger du det namn du vill ge din länk.</p>
             <label for="link-name">Rubrik:</label><br>
             <input type="text" id="link-name" required><br>
             <label for="link-url">Länk:</label><br>
-            <input type="url" id="link-url" placeholder="t.ex. www.dinsida.se" required><br>
-            <button id="save-link-button">Spara Länk!</button>
-        </div>
+            <input type="url" id="link-url" placeholder="t.ex. https//www.dinsida.se" required><br>
+            <button type="submit" id="save-link-button">Spara Länk!</button>
+        </form>
     </div>
     <!-- Script for icons -->
     <script src="https://kit.fontawesome.com/dfb17be9bd.js" crossorigin="anonymous"></script>
