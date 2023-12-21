@@ -127,6 +127,19 @@ section{
     display: none;
 }
 
+.link-div {
+    background-color: rgba(255, 255, 255, 0.5);
+}
+
+.links {
+    text-decoration: none;
+}
+
+.link-h3 {
+    text-transform: capitalize;
+    color: black;
+}
+
 /* --- Main styling Modals --- */
 /* To make background overlay */
 .modal {
