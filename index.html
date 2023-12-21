@@ -73,21 +73,24 @@
         <div class="modal-content">
             <span class="close">&times;</span>
             <h3>Info om Dagens Väder</h3>
-            <p>Vädret för imorgon och nästkommande dag visar prognosen för kl. 12:00-15:00. Dagens väder visar prognosen för de kommande 3-6 timmarna. Prognosen uppdateras automatiskt vid midnatt.</p>
+            <p>
+                Vädret för imorgon och nästkommande dag visar prognosen för kl. 12:00-15:00.<br>
+                Dagens väder visar prognosen för de kommande 3-6 timmarna. Prognosen uppdateras automatiskt vid midnatt.
+            </p>
         </div>
     </div>
 
     <!-- Modal - form for adding links -->
     <div id="link-modal" class="modal link-modal link-modal-hidden">
-        <form class="modal-content">
+        <form class="modal-content link-modal-content">
             <span id="link-modal-close" class="close">&times;</span>
             <h3>Lägg till länk</h3>
-            <p>Fyll i fälten nedan. <br>Under rubrik anger du det namn du vill ge din länk.</p>
+            <p class="link-modal-para">Fyll i fälten nedan. <br>Under rubrik anger du det namn du vill ge din länk. <br>Webbadressen behöver inledas med https:// alt. http://</p>
             <label for="link-name">Rubrik:</label><br>
             <input type="text" id="link-name" required><br>
             <label for="link-url">Länk:</label><br>
-            <input type="url" id="link-url" placeholder="t.ex. https//www.dinsida.se" required><br>
-            <button type="submit" id="save-link-button">Spara Länk!</button>
+            <input type="url" id="link-url" placeholder="https://dinsida.se" required><br>
+            <button id="save-link-button">Spara Länk!</button>
         </form>
     </div>
     <!-- Script for icons -->
