@@ -1,40 +1,59 @@
-async function updateQuote() {
-    // Fetch a random quote from the Quotable API
-    const response = await fetch("https://api.quotable.io/random");
+//call to fetch a random quote
+fetchQuote();
 
-    if (response.ok) {
-       //Convert response to JavaScript
-       const data = await response.json();
+//----------------------------------------------------
+// Function to fetch a random quote
+//----------------------------------------------------
+async function fetchQuote() {
+    try {
+        // Fetch a random quote from the Quotable API
+        const response = await fetch("https://api.quotable.io/random");
 
-       //function to check quote length
-       checkQuoteLength(data);
-    } else {
-        console.log("Fetch error: ", error);
+        //check if response is ok
+        if(!response.ok) {
+           //if not, throw error
+           throw new Error(`HTTP-fel: Status ${response.status}`);
+        }
+
+        //Convert response to JavaScript
+        const data = await response.json();
+
+        //function to check quote length
+        checkQuoteLength(data);
+
+    } catch (error) {
+        console.log('API-anrop misslyckades: ', error);
+        alert(`Nåt gick fel. Kunde inte hämta citat. ${error.message}`);
     }
   }
-updateQuote();
 
+
+//----------------------------------------------------
+// Function to check quote length
+//----------------------------------------------------  
 function checkQuoteLength(quote){
     if (quote.content.length > 90) {
-        updateQuote();
+        //if quote is longer than 90 char fetch new quote
+        fetchQuote();
     } else {
         //if quote length <= 90 display quote
-        displayResult(quote);
+        displayQuote(quote);
     }
 }
 
-function displayResult(quote){
+//----------------------------------------------------
+// Function to display quote
+//----------------------------------------------------
+function displayQuote(quote){
     const quoteDiv = document.querySelector('.quote-div');
     
     const quotePara = document.createElement('p');
     quotePara.classList.add('quote-para');
+    quotePara.textContent = quote.content; 
+    quoteDiv.appendChild(quotePara);
     
     const authorPara = document.createElement('p');
     authorPara.classList.add('author-para');
-
-    quotePara.textContent = quote.content; 
-    quoteDiv.appendChild(quotePara);
-
     authorPara.textContent = quote.author;
     quoteDiv.appendChild(authorPara);
 }
