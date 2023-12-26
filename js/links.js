@@ -12,7 +12,9 @@ const savedLinks = JSON.parse(localStorage.getItem('links')) || [];
 renderLinks();
 
 
-//------- FUNCTION renderLinks -------------
+//------------------------------------------------------------
+// Function to render links
+//------------------------------------------------------------
 function renderLinks(){
     const linkContainer = document.querySelector('.link-container');
 
@@ -39,7 +41,9 @@ function renderLinks(){
 }
 
 
-//------- FUNCTION to save links -------------
+//------------------------------------------------------------
+// Function to save links
+//------------------------------------------------------------
 saveLinkBtn.addEventListener('click', (event) => {
     //prevent page from reloading
     event.preventDefault();
@@ -73,7 +77,9 @@ saveLinkBtn.addEventListener('click', (event) => {
 })
 
 
-//------- FUNCTION add links to localStorage -------------
+//------------------------------------------------------------
+// Function to add links to localStorage
+//------------------------------------------------------------
 function addLinkToLocalStorage(link) {
     //add new link to savedLinks
     savedLinks.push(link);
@@ -82,15 +88,21 @@ function addLinkToLocalStorage(link) {
 }
 
 
-//------- FUNCTION Show add-links modal -------------
+//------------------------------------------------------------
+// Function to Show add-links modal
+//------------------------------------------------------------
 addLinkBtn.addEventListener('click', () => linkModal.classList.remove('link-modal-hidden'));
 
 
-//------- FUNCTION Hide add-links modal -------------
+//------------------------------------------------------------
+// Function to Hide add-links modal
+//------------------------------------------------------------
 closeLinkModal.addEventListener('click', () => linkModal.classList.add('link-modal-hidden'));
 
 
-//------- FUNCTION Delete links -------------------------
+//------------------------------------------------------------
+// Function to Delete links
+//------------------------------------------------------------
 function deleteLink(linkIndex) {
     //remove link at specified index
     savedLinks.splice(linkIndex, 1);
@@ -101,7 +113,9 @@ function deleteLink(linkIndex) {
 }
 
 
-//------- FUNCTION to update localStorage -------------
+//------------------------------------------------------------
+// Function to update localStorage
+//------------------------------------------------------------
 function updateLocalStorage(){
     /* if linkArray is empty remove links from localStorage,
     otherwise update the stored array */
