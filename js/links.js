@@ -17,12 +17,18 @@ function renderLinks(){
 
         //use map() to generate html element for the dashboard
         //add index to deleteLink function call to easily find right link to remove
-        let mapLinks = linkArray.map((link, index) => { 
+        let mapLinks = linkArray.map((link, index) => {
+            
+            const faviconUrl = `https://www.google.com/s2/favicons?domain=${link.linkUrl}&sz=32`;
+
             return `
                 <div class="link-div">
-                    <a class="links" href="${link.linkUrl}" target="_blank">
-                        <h3 class="link-h3">${link.linkName}</h3>
-                    </a>
+                    <div class="favicon-div">
+                        <img class="favicon" src="${faviconUrl}">
+                        <a class="links" href="${link.linkUrl}" target="_blank">
+                            <h3 class="link-h3">${link.linkName}</h3>
+                        </a>
+                    </div>
                     <i onclick= "deleteLink(${index})" class="fa-regular fa-trash-can"></i>
                 </div>
             `
