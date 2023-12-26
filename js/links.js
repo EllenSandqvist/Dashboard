@@ -6,10 +6,11 @@ const saveLinkBtn = document.getElementById('save-link-button');
 
 /* if there is a linkArray in localStorage convert it to js and store in linkArray,
 otherwise store an empty array */
-const linkArray = JSON.parse(localStorage.getItem('links')) || [];
+const savedLinks = JSON.parse(localStorage.getItem('links')) || [];
 
 //function call to render links
 renderLinks();
+
 
 //------- FUNCTION renderLinks -------------
 function renderLinks(){
@@ -17,10 +18,10 @@ function renderLinks(){
 
         //use map() to generate html element for the dashboard
         //add index to deleteLink function call to easily find right link to remove
-        let mapLinks = linkArray.map((link, index) => {
-            
+        let mapLinks = savedLinks.map((link, index) => {
+            //url to get favicons through google 
             const faviconUrl = `https://www.google.com/s2/favicons?domain=${link.linkUrl}&sz=32`;
-
+            
             return `
                 <div class="link-div">
                     <div class="favicon-div">
@@ -37,8 +38,10 @@ function renderLinks(){
     linkContainer.innerHTML = mapLinks.join('');
 }
 
+
 //------- FUNCTION to save links -------------
 saveLinkBtn.addEventListener('click', (event) => {
+    //prevent page from reloading
     event.preventDefault();
 
     const modalForm = document.querySelector('form');
@@ -52,11 +55,8 @@ saveLinkBtn.addEventListener('click', (event) => {
             linkUrl: document.getElementById('link-url').value 
         };
         
-        //add new link to linkArray
-        linkArray.push(newLink);
-        //convert linkArray and save in localStorage
-        localStorage.setItem('links', JSON.stringify(linkArray));
-
+        addLinkToLocalStorage(newLink);
+        
         //update links shown on dashboard
         renderLinks();
 
@@ -72,23 +72,40 @@ saveLinkBtn.addEventListener('click', (event) => {
     }
 })
 
+
+//------- FUNCTION add links to localStorage -------------
+function addLinkToLocalStorage(link) {
+    //add new link to savedLinks
+    savedLinks.push(link);
+    //convert savedLinks and save in localStorage
+    localStorage.setItem('links', JSON.stringify(savedLinks));
+}
+
+
 //------- FUNCTION Show add-links modal -------------
 addLinkBtn.addEventListener('click', () => linkModal.classList.remove('link-modal-hidden'));
+
 
 //------- FUNCTION Hide add-links modal -------------
 closeLinkModal.addEventListener('click', () => linkModal.classList.add('link-modal-hidden'));
 
+
 //------- FUNCTION Delete links -------------------------
 function deleteLink(linkIndex) {
     //remove link at specified index
-    linkArray.splice(linkIndex, 1);
-
-    /* if linkArray is empty remove links from localStorage,
-    otherwise update the stored array */
-    linkArray.length === 0
-        ? localStorage.removeItem('links') 
-        : localStorage.setItem('links', JSON.stringify(linkArray));
+    savedLinks.splice(linkIndex, 1);
+    updateLocalStorage();
     
     //call renderLinks to update links shown on dashboard
     renderLinks();
+}
+
+
+//------- FUNCTION to update localStorage -------------
+function updateLocalStorage(){
+    /* if linkArray is empty remove links from localStorage,
+    otherwise update the stored array */
+    savedLinks.length === 0
+        ? localStorage.removeItem('links') 
+        : localStorage.setItem('links', JSON.stringify(savedLinks));
 }
