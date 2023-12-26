@@ -174,9 +174,11 @@ section{
 /* --- Link section --- */
 .link-container {
     width: 100%;
+    max-height: 80%;
     display: flex;
     flex-direction: column;
     gap: 0.5em;
+    overflow: auto;
 }
 
 .link-div {
@@ -226,8 +228,6 @@ input {
     margin-top: 2em;
     padding: 0.3em 0.8em;
 }
-
-
 
 /* --- Weather section --- */
 #card_weather {
