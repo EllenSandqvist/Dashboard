@@ -183,6 +183,7 @@ section{
     background-color: rgba(255, 255, 255, 0.5);
     display: flex;
     justify-content: space-between;
+    align-items: center;
     padding: 0.5em 1em;
     border-radius: 10px;
 }
@@ -194,6 +195,16 @@ section{
 .link-h3 {
     text-transform: capitalize;
     color: black;
+}
+
+.favicon-div {
+    display: flex;
+    align-items: center;
+    gap: 1em;
+}
+
+.favicon {
+    min-width: 26px;
 }
 
 .link-modal-hidden {
@@ -215,6 +226,8 @@ input {
     margin-top: 2em;
     padding: 0.3em 0.8em;
 }
+
+
 
 /* --- Weather section --- */
 #card_weather {
