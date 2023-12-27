@@ -1,4 +1,4 @@
-//import function from weather.js
+//import function from weather.js to be able to update weather on new day
 import {getUserLocation} from './weather.js';
 
 //variable to check if it's a new day and weather forecast needs an update 
