@@ -5,12 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Din personliga Dashboard</title>
 
-    <!-- scripts JavaScript -->
+    <!-- JavaScript scripts -->
     <script src="./js/h1-header.js" defer></script>
     <script src="./js/notes.js" defer></script>
     <script src="./js/daily-wisdom.js" defer></script>
     <script src="./js/links.js" defer></script>
-
     <!-- scripts of module type for use of import/export-->
     <script type="module" src="./js/background.js" defer></script>
     <script type="module" src="./js/config.js" defer></script>
@@ -27,10 +26,12 @@
     <link href="https://fonts.googleapis.com/css2?family=Abel&family=Cookie&family=Croissant+One&family=DM+Serif+Display&family=Dancing+Script:wght@500&family=Josefin+Sans:wght@300;400;600&family=Luckiest+Guy&family=Montserrat+Alternates:wght@300;400&family=Montserrat:wght@300;400&family=Noto+Sans+KR:wght@100;900&family=Nunito:wght@300;800&family=Open+Sans:wght@300&family=Philosopher:wght@700&family=Playfair+Display:wght@500&family=Quicksand:wght@500;700&family=Raleway:wght@300;400&family=Roboto+Slab&family=Roboto:wght@100&family=Space+Mono&family=Tangerine&family=Vidaloka&family=Work+Sans:wght@300;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <div class="date">Här ska datum och tid in</div>
+    <div class="date">Här ska datum och tid visas</div>
     <div class="container">
+        <!-- contenteditable makes the heading editable for the user -->
         <h1 contenteditable="true">Ellen Dashboard</h1>
         <section>
+            <!-- divided dashboard cards in two rows for a nicer wrap on small screens -->
             <div class="row1">
                 <article class="card" id="card_links">
                     <h2>Snabblänkar</h2>
@@ -41,6 +42,7 @@
                 <article class="card" id="card_weather">
                     <h2>Dagens Väder</h2>
                     <div class="weather-div">
+                        <!-- namned ids with numbers that will correspond to index of weather array in js -->
                         <div id="weather0" class="weather-display"></div>
                         <div id="weather1" class="weather-display"></div>
                         <div id="weather2" class="weather-display"></div>
@@ -69,6 +71,7 @@
     </div>
     <button class="bg-button"><i class="fa-solid fa-arrow-rotate-right"></i> Slumpa ny bakgrund</button>
     <p class="photo-text photo-text-hidden"></p>
+
     <!-- Modal - info about weather forecast -->
     <div id="forecast-info" class="modal modal-hidden">
         <div class="modal-content">
@@ -76,7 +79,7 @@
             <h3>Info om Dagens Väder</h3>
             <p>
                 Vädret för imorgon och nästkommande dag visar prognosen för kl. 12:00-15:00.<br>
-                Dagens väder visar prognosen för de kommande 3-6 timmarna. Prognosen uppdateras automatiskt vid midnatt.
+                Dagens väderprognos gäller de kommande 3-4,5 timmarna. Prognosen uppdateras automatiskt vid midnatt.
             </p>
         </div>
     </div>
@@ -94,6 +97,7 @@
             <button id="save-link-button">Spara Länk!</button>
         </form>
     </div>
+    
     <!-- Script for icons -->
     <script src="https://kit.fontawesome.com/dfb17be9bd.js" crossorigin="anonymous"></script>
 </body>
