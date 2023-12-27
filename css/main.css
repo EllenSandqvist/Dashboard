@@ -3,7 +3,6 @@
 * {
     box-sizing: border-box;
     margin: 0;
-    /* border: 2px solid red; */
 }
 
 body {
@@ -48,6 +47,9 @@ p  {
 button {
     font-size: 1rem;
     cursor: pointer;
+    background-color: rgba(255, 255, 255, 0.7);
+    padding: 0.2em 0.4em;
+    border-radius: 10px;
 }
 
 .container {
@@ -90,7 +92,7 @@ section{
     gap: 0.8em;
 }
 
-/* --- Background section --- */
+/* --- Background image section --- */
 .photo-text {
     position: absolute;
     bottom: 0;
@@ -108,12 +110,6 @@ section{
     color: black;
 }
 
-.bg-button {
-    background-color: rgba(255, 255, 255, 0.7);
-    padding: 0.4em;
-    border-radius: 10px;
-}
-
 /* --- Date/Time section --- */
 .date {
     background-color: rgba(255, 255, 255, 0.6);
@@ -125,7 +121,7 @@ section{
     margin-right: 2em;
 }
 
-/* --- Main styling Modals (add link modal and forecast info --- */
+/* --- Main styling Modals (add link modal and forecast info modal--- */
 /* To make background overlay */
 .modal {
     position: fixed;
@@ -335,7 +331,7 @@ input {
 }
 
 .author-para::before {
-    content: "⸛ ";
+    content: '⸛';
     vertical-align: middle;
     font-size: 1.6rem;
 }
