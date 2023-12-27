@@ -63,7 +63,7 @@ async function fetchData() {
         //check if response is ok
         if(!response.ok) {
             //if not, throw error
-            throw new Error(`HTTP-fel: Status ${response.status}`);
+            throw new Error(`HTTP-error: Status ${response.status}`);
         }
 
         //convert response to js
@@ -79,7 +79,7 @@ async function fetchData() {
         attributePhotographer();
 
     } catch (error) {
-        console.error('API-anrop misslyckades: ', error);
+        console.error('API call failed: ', error);
         alert(`Nåt gick fel. Kunde inte hämta bakgrundsbild. ${error.message}`);
     }
 }
@@ -98,6 +98,6 @@ function addBgToLocalStorage(payload) {
         //save backgroundObj in localStorage
         localStorage.setItem('background', JSON.stringify(backgroundObj));
     } catch (error) {
-        console.error("Kunde inte spara i localStorage: ", error);
+        console.error("Could not save to localStorage: ", error);
     }
 }

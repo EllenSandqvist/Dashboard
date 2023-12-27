@@ -32,8 +32,8 @@ export function getUserLocation(){
     }
 
     function error() {
-        console.error("Unable to retrieve your location");
-        alert(`ERROR(${error.code}): ${error.message}`);
+        console.error("Unable to retrieve your location", error);
+        alert(`Error (${error.code}): ${error.message}`);
     }
 }
 
@@ -50,17 +50,17 @@ async function getForecast(lat, lon) {
         const response = await fetch(userApiUrl);
 
         if(!response.ok) {
-            throw new Error(`HTTP-fel: Status  ${response.status}`);
+            throw new Error(`HTTP-error: Status  ${response.status}`);
         }
         
         const userForecast = await response.json();
-        console.log("Fetchad väderdata: ", userForecast);
+        console.log("Fetched forecast: ", userForecast);
         
         //function to filter out relevant info from user forecast 
         filterForecast(userForecast);
         
     } catch(error) {
-        console.error("Ett fel inträffade: ", error);
+        console.error("An error occurred: ", error);
         alert("Kunde inte hämta väderprognos, Error: " + error.message);
     }   
 }
@@ -94,7 +94,7 @@ function filterForecast(data){
 
     //concat the arrays for today and the next two days in the forecast for three days
     const threeDayForecast = today.concat(nextTwoDaysForecast);
-    console.log("Filtrerad prognos för 3 dagar:", threeDayForecast);
+    console.log("Filtered forecast for 3 days:", threeDayForecast);
 
     //function to render forecast on dashboard
     renderForcast(threeDayForecast);

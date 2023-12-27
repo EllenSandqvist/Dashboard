@@ -52,7 +52,7 @@ saveLinkBtn.addEventListener('click', (event) => {
     
     //if statement to check so form is correct filled
     if(modalForm.checkValidity()) {
-        console.log("formuläret är rätt ifyllt!");
+        console.log("The form is correctly filled!");
         //add form info to link object
         let newLink = {
             linkName: document.getElementById('link-name').value, 
@@ -87,7 +87,7 @@ function addLinkToLocalStorage(link) {
         //convert savedLinks and save in localStorage
         localStorage.setItem('links', JSON.stringify(savedLinks));
     } catch (error) {
-        console.error("Kunde inte spara i localStorage: ", error);
+        console.error("Could not save to localStorage: ", error);
         alert(`Nåt gick fel. Dina länkar kunde inte sparas. ${error.message}`);
     }
     
@@ -132,6 +132,6 @@ function updateLocalStorage(){
             localStorage.setItem('links', JSON.stringify(savedLinks));
         }
     } catch (error) {
-        console.error("Kunde inte uppdatera localStorage, ", error);
+        console.error("Could not save to localStorage: ", error);
     }
 }

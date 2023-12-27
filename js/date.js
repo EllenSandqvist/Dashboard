@@ -37,7 +37,7 @@ function showCurrentTime(){
         /* if statement to check if it's a new day 
         - if so call getUserLocation() to update weather */
         if(initialDate !== dateOfMonth){
-            console.log("Det är inte längre dag " + initialDate + " i månaden. Uppdatera vädret!");
+            console.log("It's no longer day " + initialDate + " of the month. Update forecast!");
             getUserLocation();
             initialDate = dateOfMonth;
         }

@@ -37,6 +37,6 @@ function saveHeaderToLocalStorage(heading) {
     try {
         localStorage.setItem('Dashboard-h1', heading);
     } catch (error) {
-        console.error("Kunde inte spara i localStorage: ", error);
+        console.error("Could not save to localStorage: ", error);
     }
 }

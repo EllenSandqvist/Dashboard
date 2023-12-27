@@ -32,7 +32,7 @@ function saveToLocalStorage(text) {
     try {
         localStorage.setItem('notes', text);
     } catch (error){
-        console.error("Kunde inte spara i localStorage: ", error);
+        console.error("Could not save to localStorage: ", error);
         alert(`Nåt gick fel. Dina anteckningar kunde inte sparas. ${error.message}`);
     }
 };

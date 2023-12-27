@@ -12,7 +12,7 @@ async function fetchQuote() {
         //check if response is ok
         if(!response.ok) {
            //if not, throw error
-           throw new Error(`HTTP-fel: Status ${response.status}`);
+           throw new Error(`HTTP-error: Status ${response.status}`);
         }
 
         //Convert response to JavaScript
@@ -22,7 +22,7 @@ async function fetchQuote() {
         checkQuoteLength(data);
 
     } catch (error) {
-        console.error('API-anrop misslyckades: ', error);
+        console.error('API call failed: ', error);
         alert(`Nåt gick fel. Kunde inte hämta citat. ${error.message}`);
     }
   }
