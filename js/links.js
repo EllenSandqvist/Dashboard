@@ -83,8 +83,13 @@ saveLinkBtn.addEventListener('click', (event) => {
 function addLinkToLocalStorage(link) {
     //add new link to savedLinks
     savedLinks.push(link);
-    //convert savedLinks and save in localStorage
-    localStorage.setItem('links', JSON.stringify(savedLinks));
+    try {
+        //convert savedLinks and save in localStorage
+        localStorage.setItem('links', JSON.stringify(savedLinks));
+    } catch (error) {
+        console.log("Kunde inte spara i localStorage: ", error);
+    }
+    
 }
 
 

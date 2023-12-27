@@ -34,5 +34,9 @@ h1Header.addEventListener('input', () => {
 // Function to save H1 to localStorage
 //--------------------------------------------------------------
 function saveHeaderToLocalStorage(heading) {
-    localStorage.setItem('Dashboard-h1', heading);
+    try {
+        localStorage.setItem('Dashboard-h1', heading);
+    } catch (error) {
+        console.log("Kunde inte spara i localStorage: ", error);
+    }
 }
