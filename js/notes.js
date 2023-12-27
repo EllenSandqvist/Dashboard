@@ -1,35 +1,52 @@
 const noteBoard = document.getElementById('note-board');
 const deleteNotesBtn = document.getElementById('delete-notes');
-let noteText = localStorage.getItem('notes') || '';
+let storedNotes = localStorage.getItem('notes') || '';
 
-//function to render notes
+//function call to render notes
+renderNotes();
+
+
+//--------------------------------------------------------------
+// Function to render notes
+//--------------------------------------------------------------
 function renderNotes() {
-    noteBoard.value = noteText;
-}
+    noteBoard.value = storedNotes;
+};
 
-//eventlistener on noteboard that "listens" to input
+
+//--------------------------------------------------------------
+// Eventlistener on noteboard that "listens" to input
+//--------------------------------------------------------------
 noteBoard.addEventListener('input', () => {
-    noteText = noteBoard.value;
+    storedNotes = noteBoard.value;
     
-    //function for saving notes on localStorage
-    saveToLocalStorage(noteText);
+    //saving notes in localStorage
+    saveToLocalStorage(storedNotes);
 });
 
-function saveToLocalStorage(text) {
-    localStorage.setItem('notes', text);
-}
 
-//function for deleting notes
+//--------------------------------------------------------------
+// Function to save notes to localStorage
+//--------------------------------------------------------------
+function saveToLocalStorage(text) {
+    try {
+        localStorage.setItem('notes', text);
+    } catch (error){
+        console.error("Kunde inte spara i localStorage: ", error);
+        alert(`Nåt gick fel. Dina anteckningar kunde inte sparas. ${error.message}`);
+    }
+};
+
+
+//--------------------------------------------------------------
+// Function for deleting notes
+//--------------------------------------------------------------
 deleteNotesBtn.addEventListener('click', () => {
     const confirmDelete = confirm('Vill du verkligen radera alla anteckningar?');
 
     if (confirmDelete) {
-        localStorage.clear();
-        noteText = '';
+        localStorage.removeItem('notes');
+        storedNotes = '';
         renderNotes(); 
     }
-})
-
-renderNotes();
-
-
+});

@@ -7,6 +7,7 @@ let initialDate = null;
 //eventlistener with a function that starts when window is loaded
 window.addEventListener('load', showCurrentTime);
 
+
 //----------------------------------------------------
 // Function to show current date and time
 //----------------------------------------------------

@@ -3,9 +3,13 @@ import { apiKey } from "./config.js";
 
 const weatherDiv = document.querySelector('.weather-div');
 
+//function call to get user location
 getUserLocation();
 
-// -------- Geolocation section ---------------
+
+//--------------------------------------------------------------
+// Function to get user location, will be imported in date.js
+//--------------------------------------------------------------
 export function getUserLocation(){
     //if statement to check if user browser supports geolocation
     if(!navigator.geolocation) {
@@ -28,37 +32,45 @@ export function getUserLocation(){
     }
 
     function error() {
-        console.log("Unable to retrieve your location");
+        console.error("Unable to retrieve your location");
         alert(`ERROR(${error.code}): ${error.message}`);
     }
 }
-// -----------------------------------------------------------------
 
-//fetch weather forecast for user location
+
+//--------------------------------------------------------------
+// Function to fetch weather forecast for user location
+//--------------------------------------------------------------
 async function getForecast(lat, lon) {
+    try{
+        /* added one parameter for language, one for unit selection and 
+        one to limit the API response to only cover needed days and times*/ 
+        const userApiUrl = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&units=metric&lang=sv&cnt=21&appid=${apiKey}`;
 
-    /* added one parameter for language, one for unit selection and 
-    one to limit the API response to only cover needed days and times*/ 
-    const userApiUrl = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&units=metric&lang=sv&cnt=21&appid=${apiKey}`;
+        const response = await fetch(userApiUrl);
 
-    let response = await fetch(userApiUrl);
-
-    if(response.ok){
-        const userForecast = await response.json();
-        console.log("This is the fetched list: ", userForecast);
+        if(!response.ok) {
+            throw new Error(`HTTP-fel: Status  ${response.status}`);
+        }
         
+        const userForecast = await response.json();
+        console.log("Fetchad väderdata: ", userForecast);
+        
+        //function to filter out relevant info from user forecast 
         filterForecast(userForecast);
-    } else {
-        console.log("HTTP-errors: " + response.status);
-        const weatherPara = document.createElement('p');
-        weatherPara.textContent = "Kunde inte hämta väderprognos, Error: " + response.status;
-        weatherDiv.appendChild(weatherPara);
-    }
+        
+    } catch(error) {
+        console.error("Ett fel inträffade: ", error);
+        alert("Kunde inte hämta väderprognos, Error: " + error.message);
+    }   
 }
-// --------------------------------------------
 
+
+//--------------------------------------------------------------
+// Function to filter forecast 
+//--------------------------------------------------------------
 function filterForecast(data){
-    //today will display the first list item i.e. the weather forecast for the following 3-6 hours.
+    //today will display the first list item i.e. the weather forecast for the following 3 - 4.5 hours.
     const today = [data.list[0]];
    
     //the weather for tomorrow and day3 will show the forecast for the weather at noon
@@ -82,20 +94,27 @@ function filterForecast(data){
 
     //concat the arrays for today and the next two days in the forecast for three days
     const threeDayForecast = today.concat(nextTwoDaysForecast);
-    console.log(threeDayForecast);
+    console.log("Filtrerad prognos för 3 dagar:", threeDayForecast);
 
+    //function to render forecast on dashboard
     renderForcast(threeDayForecast);
 }
-// --------------------------------------------
 
+
+//--------------------------------------------------------------
+// Function to render forecast
+//--------------------------------------------------------------
 // Use forEach to render weather for three days
 function renderForcast(array) {
     array.forEach(function(element, index){
-        const weatherDisplay = document.getElementById(`weather${index}`)
+        const weatherDisplay = document.getElementById(`weather${index}`);
+
+        //function renderForecastDay to get the right weatherHeading
         const weatherHeading = renderForecastDay(index);
 
+        //display weather on dashboard
         weatherDisplay.innerHTML = 
-           `<img class="weather-icon" src="https://openweathermap.org/img/wn/${element.weather[0].icon}@2x.png"></img>
+           `<img class="weather-icon" src="https://openweathermap.org/img/wn/${element.weather[0].icon}@2x.png">
             <div class="weather-text">
                 <h3>${weatherHeading}</h3>
                 <div class="weather-para">
@@ -105,8 +124,11 @@ function renderForcast(array) {
             </div>`
     })
 }
-// --------------------------------------------
 
+
+//--------------------------------------------------------------
+// Function to render forecast day (i.e. forecast h3)
+//--------------------------------------------------------------
 function renderForecastDay(index){
     if(index === 0) {
         return "Idag";
@@ -116,6 +138,8 @@ function renderForecastDay(index){
         const day3 = new Date();
         day3.setDate(day3.getDate() + 2);
         
+        /* getDay() returns a number 0-6, 0 = Sunday, 1 = Monday... 
+        Weekdays array is used to convert number to corresponding weekday*/
         const weekdays = [
             "Söndag", "Måndag", "Tisdag",
             "Onsdag", "Torsdag", "Fredag", "Lördag"
@@ -124,27 +148,35 @@ function renderForecastDay(index){
         return weekdays[day3.getDay()];
     }
 }
-// --------------------------------------------
 
-//function to update forecast on button click
+
+//--------------------------------------------------------------
+// Function to update forecast on button click
+//--------------------------------------------------------------
 const weatherBtn = document.getElementById('weather-button');
+
 weatherBtn.addEventListener('click', function(){
+    //adding text so user can see that weather is updated
     const updateText = document.createElement('p');
     updateText.innerHTML = `<p>Vädret uppdateras...</p>`;
     weatherDiv.appendChild(updateText);
     setTimeout(()=>{
-        console.log("uppdaterar prognos!");
         updateText.remove();
         getUserLocation();
     }, 1000);
 });
-// --------------------------------------------
 
-//function to show info modal
+
+//--------------------------------------------------------------
+// Function to show info modal
+//--------------------------------------------------------------
 const infoIcon = document.querySelector('.fa-circle-info');
 const infoModal =document.getElementById('forecast-info');
 infoIcon.addEventListener('click',()=>infoModal.classList.remove('modal-hidden'));
 
-//function to hide info modal
+
+//--------------------------------------------------------------
+// Function to hide info modal
+//--------------------------------------------------------------
 const closeModal = document.querySelector('.close');
 closeModal.addEventListener('click',()=>infoModal.classList.add('modal-hidden'));

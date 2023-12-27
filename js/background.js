@@ -79,7 +79,7 @@ async function fetchData() {
         attributePhotographer();
 
     } catch (error) {
-        console.log('API-anrop misslyckades: ', error);
+        console.error('API-anrop misslyckades: ', error);
         alert(`Nåt gick fel. Kunde inte hämta bakgrundsbild. ${error.message}`);
     }
 }
@@ -94,7 +94,10 @@ function addBgToLocalStorage(payload) {
         portfolio: payload.user.portfolio_url,
         user: payload.user.name
     }
-
-    //save backgroundObj in localStorage
-    localStorage.setItem('background', JSON.stringify(backgroundObj));
+    try {
+        //save backgroundObj in localStorage
+        localStorage.setItem('background', JSON.stringify(backgroundObj));
+    } catch (error) {
+        console.error("Kunde inte spara i localStorage: ", error);
+    }
 }

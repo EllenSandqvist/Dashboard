@@ -22,7 +22,7 @@ async function fetchQuote() {
         checkQuoteLength(data);
 
     } catch (error) {
-        console.log('API-anrop misslyckades: ', error);
+        console.error('API-anrop misslyckades: ', error);
         alert(`Nåt gick fel. Kunde inte hämta citat. ${error.message}`);
     }
   }

@@ -87,7 +87,8 @@ function addLinkToLocalStorage(link) {
         //convert savedLinks and save in localStorage
         localStorage.setItem('links', JSON.stringify(savedLinks));
     } catch (error) {
-        console.log("Kunde inte spara i localStorage: ", error);
+        console.error("Kunde inte spara i localStorage: ", error);
+        alert(`Nåt gick fel. Dina länkar kunde inte sparas. ${error.message}`);
     }
     
 }
@@ -122,9 +123,15 @@ function deleteLink(linkIndex) {
 // Function to update localStorage
 //------------------------------------------------------------
 function updateLocalStorage(){
-    /* if linkArray is empty remove links from localStorage,
-    otherwise update the stored array */
-    savedLinks.length === 0
-        ? localStorage.removeItem('links') 
-        : localStorage.setItem('links', JSON.stringify(savedLinks));
+    try {
+        /* if linkArray is empty remove links from localStorage,
+        otherwise update the stored array */
+        if(savedLinks.length === 0) {
+            localStorage.removeItem('links') 
+        } else {
+            localStorage.setItem('links', JSON.stringify(savedLinks));
+        }
+    } catch (error) {
+        console.error("Kunde inte uppdatera localStorage, ", error);
+    }
 }
